@@ -13,7 +13,6 @@ class EventBus{
         console.warn("Сработало событие: " + event);
         if(!_.events[event]) return;
         for(let i = 0; i < _.events[event].length;i++){
-            console.log(_.events[event][i]);
             _.events[event][i](data);
         }
     }
