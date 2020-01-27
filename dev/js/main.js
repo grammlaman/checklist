@@ -17,7 +17,7 @@ let months = {
 class List {
     constructor() {
         const _ = this;
-        _.date = new Date();
+        _.date = new Date('2020-02');
         _.year = _.date.getFullYear();
         _.month = _.date.getMonth();
         _.dayInMonth = _.date.getDate();
@@ -28,6 +28,22 @@ class List {
             yearSelect : document.querySelector('#yearSelect'),
             daysInMonth : document.querySelector('.calendar-month')
         };
+    }
+    //Метод выбора первого дня
+    firstDayInWeek(month,year){
+        let unit = new Date(year + ' - ' + month),
+            firstDay = unit.getDay();
+        document.querySelector('.calendar-month-day').style.marginLeft = 'calc(100% / 7)' * firstDay + 'px' ;
+    }
+    //Метод выбора активного дня
+    pickActive(el = (this.dayInMonth - 1)){
+        const _ = this;
+        let arr = document.querySelectorAll('.calendar-month-day');
+        for(let i = 0; i < arr.length; i++){
+            if(i == el){
+                arr[i].classList.add('calendar-active')
+            }
+        }
     }
     //Метод отприсовки дней в месяце
     drawDays(month,year){
@@ -55,6 +71,8 @@ class List {
                 btn.append(day,tasks);
                 _.calendar.daysInMonth.append(btn)
         }
+        _.firstDayInWeek();
+        _.pickActive();
     }
     init(){
         const _ = this;
@@ -66,11 +84,8 @@ list.init();
 
 document.querySelector('.calendar-month').addEventListener('click',function (el) {
     let clickTarget = el.target;
-    console.log(clickTarget);
     if(clickTarget == document.querySelector('.calendar-month')) return;
     else if(clickTarget == document.querySelector('.calendar-month-day')) return;
-    else {
-        clickTarget = clickTarget.parentElement;
-    }
-    console.log(clickTarget)
+    else {clickTarget = clickTarget.parentElement;}
+    list.pickActive(clickTarget)
 });
