@@ -1,7 +1,46 @@
 extends template/main
 append vars
   -
-    page_title= 'main page'
+    page_title= 'List'
 block content
     main
         .section
+            h1 CheckList
+            .body
+                .do
+                    h2 Запланированные дела на #[a(href='')]
+                    ul
+                        li
+                            .do-number 01
+                            .do-title Сходить в магазин
+                            .do-desc Сходить в Южный и купить продукты для пиццы
+                            button.do-but.do-red Ред.
+                            button.do-but.do-check Ок.
+                .calendar
+                    h2 Календарь
+                    .calendar-head.calendar-year 2020
+                    ul.calendar-list.calendar-year-list
+                        - for(let i = 0; i < 10; i++)
+                            li
+                                button.calendar-but 2020
+                    .calendar-head.calendar-month Январь
+                    ul.calendar-list.calendar-year-month
+                        - for(let i = 0; i < 12; i++)
+                            li
+                                button.calendar-but Январь
+                    .calendar-week-head
+                        - for(let i=0; i<7; i++)
+                            div.calendar-week-head-item Пн.
+                    .calendar-month-body
+                        - for(let i=0; i<31; i++)
+                            li
+                                button.calendar-day
+                                    span 01
+                                    span Дел 0
+                .add
+                    h2 Добавить дело
+                    input(type='date' ).add-date
+                    input(type='text' placeholder='Название').add-title
+                    input(type='text' placeholder='Описание').add-desc
+                    button(type='button').add-sub Сохранить
+                    button(type='button').add-clear Очистить
