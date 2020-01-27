@@ -1,8 +1,12 @@
 @import "../../../../core/mixins/reset"
 @import "../../../../core/mixins/mixins"
 @import "vars"
-$font_body: 14px
-+font_inc($f_reg,'roboto-regular.ttf')
+
+$font_body: 16px
++font_inc($f_reg,'SFProDisplayRegular.woff2')
++font_inc($f_semi,'SFProDisplaySemibold.woff2')
++font_inc($f_thin,'SFProDisplayThin.woff2')
+
 .set
 	+wh(100%)
 html,body
@@ -10,7 +14,7 @@ html,body
 	overflow-x: hidden
 body
 	+wh(100%)
-	+font($font_body,$f_reg,$black)
+	+font($font_body,$f_semi,$gray)
 
 input,button
 	font-family: inherit
