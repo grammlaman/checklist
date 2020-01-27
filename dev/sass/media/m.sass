@@ -11,8 +11,14 @@ $unit: 'px'
   +font(24px,$f_semi,$gray)
 .do
   padding: 30px 0 0
-  .block-title
+  &-row
+    display: flex
+    justify-content: space-between
+    align-items: center
+  &-link
     font-size: 20px
+    &:last-child
+      font-size: 16px
   &-body
     padding-bottom: 10px
     border-bottom: 1px solid $gray
@@ -64,8 +70,10 @@ $unit: 'px'
     display: flex
     &-item
       +w(calc(320px / 7))
+      padding: 5px 0
       background-color: $gray
       border-right: 1px solid #fff
+      font-family: $f_reg
       color: #fff
       text-align: center
   &-month
@@ -82,6 +90,10 @@ $unit: 'px'
         display: block
       &-do
         +font(12px,$f_thin,#fff)
+      &:first-child
+        margin-left: calc((100% / 7) * 2)
+  &-active
+    background-color: $gray
 .add
   padding: 30px 0
   &-form

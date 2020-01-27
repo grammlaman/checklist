@@ -7,7 +7,9 @@ block content
         h1.title Check LIST
         .section.body
             .do
-                a(href='').block-title 27.01.2020
+                .do-row
+                    a(href='#calendar').do-link 27-01-2020
+                    a(href='#add').do-link Добавить дело
                 .do-body
                     .do-cont
                         .do-number 01.
@@ -22,7 +24,7 @@ block content
                         button.do-button.do-red Ред.
                         button.do-button.do-check Ок.
                     .do-desc Завтра утром тренировка, подготовиться лучше заранее
-            .calendar
+            .calendar#calendar
                 h2.block-title Календарь
                 .calendar-row
                     .calendar-select
@@ -40,14 +42,26 @@ block content
                         - for(let i = 0; i < 12; i++)
                             button.calendar-select-but Январь
                 .calendar-week
-                    - for(let i=0; i<7; i++)
-                        div.calendar-week-item Пн.
+                    div.calendar-week-item Пн.
+                    div.calendar-week-item Вт.
+                    div.calendar-week-item Ср.
+                    div.calendar-week-item Чт.
+                    div.calendar-week-item Пт.
+                    div.calendar-week-item Сб.
+                    div.calendar-week-item Вс.
                 .calendar-month
-                    - for(let i=0; i<31; i++)
+                    - for(let i=0; i<26; i++)
                         button.calendar-month-day
                             span.calendar-month-day-number 01
-                            span.calendar-month-day-do Дел 0
-            .add
+                            span.calendar-month-day-do Дел: 0
+                    button.calendar-month-day.calendar-active
+                        span.calendar-month-day-number 27
+                        span.calendar-month-day-do Дел: 5
+                    - for(let i=0; i<4; i++)
+                        button.calendar-month-day
+                            span.calendar-month-day-number 01
+                            span.calendar-month-day-do Дел: 0
+            .add#add
                 h2.block-title Добавить дело
                 form.add-form
                     input(type='date' ).add-date.add-input
