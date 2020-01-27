@@ -34,21 +34,20 @@ class User{
         const _ = this;
         _.type = ['guest','user'];
     }
-    loginAsGuest(type){
+    async checkLogin(){
         const _ = this;
-        console.log(_.type);
-        if(type === _.type[0]){
-
+        let req = await _.xhr.fetch('JSON',{
+            path : '/front/components/user/assets/checkLogin.php',
+            data : null
+        });
+        _.role = req['role'];
+        if(req['role'] === 'guest'){
+            MainEventBus.trigger('User','enteredAsGuest',req);
         } else {
-            _.loginAsUser(type);
+            MainEventBus.trigger('User','enteredAsUser',req)
         }
     }
-    loginAsUser(type){
-        const _ = this;
-        if(type === _.type[1]){
 
-        } else return;
-    }
 }
 let a = new User;
 let eventBus = new EventBus();
