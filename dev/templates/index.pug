@@ -50,14 +50,14 @@ block content
                 .calendar-row
                     .calendar-select
                         .calendar-row.calendar-select-row
-                            button.calendar-select-head 2020
+                            button.calendar-select-head#monthSelect 2020
                             button.calendar-select-button <
                             button.calendar-select-button >
                         - for(let i = 0; i < 10; i++)
                             button.calendar-select-but 2020
                     .calendar-select
                         .calendar-row.calendar-select-row
-                            button.calendar-select-head Январь
+                            button.calendar-select-head#yearSelect Январь
                             button.calendar-select-button <
                             button.calendar-select-button >
                         - for(let i = 0; i < 12; i++)
@@ -71,17 +71,6 @@ block content
                     div.calendar-week-item Сб.
                     div.calendar-week-item Вс.
                 .calendar-month
-                    - for(let i=0; i<26; i++)
-                        button.calendar-month-day
-                            span.calendar-month-day-number 01
-                            span.calendar-month-day-do Дел: 0
-                    button.calendar-month-day.calendar-active
-                        span.calendar-month-day-number 27
-                        span.calendar-month-day-do Дел: 5
-                    - for(let i=0; i<4; i++)
-                        button.calendar-month-day
-                            span.calendar-month-day-number 01
-                            span.calendar-month-day-do Дел: 0
             form.add#add
                 h2.block-title Добавить дело
                 .add-form
