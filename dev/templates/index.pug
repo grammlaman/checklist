@@ -4,7 +4,7 @@ append vars
     page_title= 'List'
 block content
     main
-        h1.title Check LIST
+        h1.title R - C - L
         .section.body
             .do
                 .do-row
@@ -20,6 +20,27 @@ block content
                 .do-body
                     .do-cont
                         .do-number 02.
+                        .do-title Собрать сумку на тренировку
+                        button.do-button.do-red Ред.
+                        button.do-button.do-check Ок.
+                    .do-desc Завтра утром тренировка, подготовиться лучше заранее
+                .do-body
+                    .do-cont
+                        .do-number 03.
+                        .do-title Собрать сумку на тренировку
+                        button.do-button.do-red Ред.
+                        button.do-button.do-check Ок.
+                    .do-desc Завтра утром тренировка, подготовиться лучше заранее
+                .do-body
+                    .do-cont
+                        .do-number 04.
+                        .do-title Собрать сумку на тренировку
+                        button.do-button.do-red Ред.
+                        button.do-button.do-check Ок.
+                    .do-desc Завтра утром тренировка, подготовиться лучше заранее
+                .do-body
+                    .do-cont
+                        .do-number 05.
                         .do-title Собрать сумку на тренировку
                         button.do-button.do-red Ред.
                         button.do-button.do-check Ок.
@@ -61,9 +82,9 @@ block content
                         button.calendar-month-day
                             span.calendar-month-day-number 01
                             span.calendar-month-day-do Дел: 0
-            .add#add
+            form.add#add
                 h2.block-title Добавить дело
-                form.add-form
+                .add-form
                     input(type='date' ).add-date.add-input
                     input(type='text' placeholder='Название').add-title.add-input
                     input(type='text' placeholder='Описание').add-desc.add-input

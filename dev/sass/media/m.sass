@@ -10,7 +10,6 @@ $unit: 'px'
 .block-title
   +font(24px,$f_semi,$gray)
 .do
-  padding: 30px 0 0
   &-row
     display: flex
     justify-content: space-between
@@ -42,8 +41,6 @@ $unit: 'px'
     margin-top: 10px
     display: none
 .calendar
-  +w(320px)
-  padding: 30px 0 0
   &-row
     display: flex
     align-items: flex-start
@@ -66,7 +63,7 @@ $unit: 'px'
   &-week
     display: flex
     &-item
-      +w(calc(320px / 7))
+      +w(calc(100% / 7))
       padding: 5px 0
       background-color: $gray
       border-right: 1px solid #fff
@@ -77,11 +74,12 @@ $unit: 'px'
     display: flex
     flex-wrap: wrap
     &-day
-      +wh(calc(320px / 7))
+      +wh(calc(100% / 7))
       background-color: #777
       border: 1px solid #fff
       border-left: none
       border-bottom: none
+      padding: 5px 0
       &-number
         +font(14px,$f_reg,#fff)
         display: block
@@ -92,7 +90,6 @@ $unit: 'px'
   &-active
     background-color: $gray
 .add
-  padding: 30px 0
   &-form
     display: flex
     justify-content: space-between
@@ -107,3 +104,9 @@ $unit: 'px'
     background-color: $gray
     color: #fff
     margin-top: 15px
+.do,.calendar,.add
+  +w(320px)
+  padding: 30px 0 0
+  margin: auto
+.body
+  padding-bottom: 30px

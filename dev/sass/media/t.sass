@@ -1,3 +1,22 @@
 $unit: 'px'
 .section
   +w($tablet#{$unit})
+.title
+  position: fixed
+  top: 0
+  right: 0
+  left: 0
+.do,.calendar,.add
+  +w(700px)
+.do
+  margin-top: 88px
+.calendar
+  margin-bottom: 212px
+  &-select
+    +w(320px)
+.add
+  background-color: #fff
+  position: fixed
+  bottom: 30px
+  right: 0
+  left: 0
