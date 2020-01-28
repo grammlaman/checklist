@@ -14,10 +14,11 @@ let months = {
         'Декабрь'
     ]
 };
+
 class List {
     constructor() {
         const _ = this;
-        _.date = new Date('2020-02');
+        _.date = new Date();
         _.year = _.date.getFullYear();
         _.month = _.date.getMonth();
         _.dayInMonth = _.date.getDate();
@@ -31,17 +32,22 @@ class List {
     }
     //Метод выбора первого дня
     firstDayInWeek(month,year){
-        let unit = new Date(year + ' - ' + month),
-            firstDay = unit.getDay();
-        document.querySelector('.calendar-month-day').style.marginLeft = 'calc(100% / 7)' * firstDay + 'px' ;
+        const _ = this;
+        month += 1;
+        let unit = new Date(year + '-' + month),
+            firstDayStyle = unit.getDay(),
+            firstDay = document.querySelector('.calendar-month-first');
+        firstDay.style.gridColumnStart = firstDayStyle;
     }
     //Метод выбора активного дня
-    pickActive(el = (this.dayInMonth - 1)){
+    pickActive(el){
         const _ = this;
         let arr = document.querySelectorAll('.calendar-month-day');
         for(let i = 0; i < arr.length; i++){
-            if(i == el){
+            if(i == el - 1){
                 arr[i].classList.add('calendar-active')
+            } else {
+                arr[i].classList.remove('calendar-active')
             }
         }
     }
@@ -69,23 +75,42 @@ class List {
                 tasks.className = 'calendar-month-day-do';
                 tasks.textContent = 'Дел: 0';
                 btn.append(day,tasks);
-                _.calendar.daysInMonth.append(btn)
+                _.calendar.daysInMonth.append(btn);
+            if(i == 0){ btn.classList.add('calendar-month-first')
+
+            }
         }
-        _.firstDayInWeek();
-        _.pickActive();
+        _.firstDayInWeek(_.month,_.year);
     }
     init(){
         const _ = this;
-        _.drawDays(_.month,_.year)
+        _.drawDays(_.month,_.year);
+        _.pickActive(_.dayInMonth);
     }
 }
 let list = new List();
 list.init();
 
-document.querySelector('.calendar-month').addEventListener('click',function (el) {
+list.calendar.monthSelect.onclick = function(){
+    let elem = document.querySelectorAll('.calendar-select-ul');
+    if(elem[1].classList.contains('calendar-select-ul-active')){
+        elem[1].classList.remove('calendar-select-ul-active')
+    }
+    elem[0].classList.toggle('calendar-select-ul-active')
+};
+list.calendar.yearSelect.onclick = function(){
+    let elem = document.querySelectorAll('.calendar-select-ul');
+    if(elem[0].classList.contains('calendar-select-ul-active')){
+        elem[0].classList.remove('calendar-select-ul-active')
+    }
+    elem[1].classList.toggle('calendar-select-ul-active')
+};
+list.calendar.daysInMonth.addEventListener('click',function (el) {
     let clickTarget = el.target;
-    if(clickTarget == document.querySelector('.calendar-month')) return;
-    else if(clickTarget == document.querySelector('.calendar-month-day')) return;
-    else {clickTarget = clickTarget.parentElement;}
-    list.pickActive(clickTarget)
+    if(clickTarget == list.calendar.daysInMonth) return;
+    else if(!clickTarget.classList.contains('calendar-month-day')){
+        clickTarget = clickTarget.parentElement;
+    }
+    let day = clickTarget.querySelector('.calendar-month-day-number');
+    list.pickActive(day.textContent)
 });

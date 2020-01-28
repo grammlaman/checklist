@@ -49,19 +49,21 @@ block content
                 h2.block-title Календарь
                 .calendar-row
                     .calendar-select
-                        .calendar-row.calendar-select-row
-                            button.calendar-select-head#monthSelect 2020
-                            button.calendar-select-button <
-                            button.calendar-select-button >
-                        - for(let i = 0; i < 10; i++)
-                            button.calendar-select-but 2020
+                        button.calendar-select-button#monthSelect 2020
+                        button.calendar-select-button <
+                        button.calendar-select-button >
                     .calendar-select
-                        .calendar-row.calendar-select-row
-                            button.calendar-select-head#yearSelect Январь
-                            button.calendar-select-button <
-                            button.calendar-select-button >
+                        button.calendar-select-button#yearSelect Январь
+                        button.calendar-select-button <
+                        button.calendar-select-button >
+                    ul.calendar-select-ul
+                        - for(let i = 0; i < 10; i++)
+                            li
+                                button.calendar-select-but 2020
+                    ul.calendar-select-ul
                         - for(let i = 0; i < 12; i++)
-                            button.calendar-select-but Январь
+                            li
+                                button.calendar-select-but Январь
                 .calendar-week
                     div.calendar-week-item Пн.
                     div.calendar-week-item Вт.
