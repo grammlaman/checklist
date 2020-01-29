@@ -1,5 +1,5 @@
 let months = {
-    ru : [
+    'ru' : [
         'Январь',
         'Февраль',
         'Март',
@@ -23,46 +23,34 @@ class List {
         _.month = _.date.getMonth();
         _.dayInMonth = _.date.getDate();
         _.dayInWeek = _.date.getDay();
-        _.calendar = {
+        _.language = 'ru';
+        _.cal = {
             body : document.querySelector('#calendar'),
             monthSelect : document.querySelector('#monthSelect'),
             yearSelect : document.querySelector('#yearSelect'),
-            daysInMonth : document.querySelector('.calendar-month')
+            month : document.querySelector('.calendar-month')
         };
     }
+
     //Метод выбора первого дня
-    firstDayInWeek(month,year){
+    firstDayInWeek(){
         const _ = this;
-        month += 1;
-        let unit = new Date(year + '-' + month),
+        let unit = new Date(_.year + '-' + (_.month + 1)),
             firstDayStyle = unit.getDay(),
             firstDay = document.querySelector('.calendar-month-first');
         firstDay.style.gridColumnStart = firstDayStyle;
     }
-    //Метод выбора активного дня
-    pickActive(el){
-        const _ = this;
-        let arr = document.querySelectorAll('.calendar-month-day');
-        for(let i = 0; i < arr.length; i++){
-            if(i == el - 1){
-                arr[i].classList.add('calendar-active')
-            } else {
-                arr[i].classList.remove('calendar-active')
-            }
-        }
-    }
+
     //Метод отприсовки дней в месяце
     drawDays(month,year){
         const _ = this;
         let days = 31;
-        if((month == 3) || (month == 5) || (month == 8) || (month == 10)){
-            days = 30;
-        } else if((month == 1)){
-            if((year % 4) == 0){
-                days = 29
-            } else {days = 28}
+        if((month == 3) || (month == 5) || (month == 8) || (month == 10)){days = 30;}
+        else if((month == 1)){
+            if((year % 4) == 0){days = 29}
+            else {days = 28}
         }
-        _.calendar.daysInMonth.innerHTML = '';
+        _.cal.month.innerHTML = '';
         for(let i = 0; i < days; i++){
             let btn = document.createElement('BUTTON'),
                 day = document.createElement('SPAN'),
@@ -75,12 +63,20 @@ class List {
                 tasks.className = 'calendar-month-day-do';
                 tasks.textContent = 'Дел: 0';
                 btn.append(day,tasks);
-                _.calendar.daysInMonth.append(btn);
-            if(i == 0){ btn.classList.add('calendar-month-first')
-
-            }
+                _.cal.month.append(btn);
+            if(i == 0){btn.classList.add('calendar-month-first')}
         }
-        _.firstDayInWeek(_.month,_.year);
+        _.firstDayInWeek();
+    }
+
+    //Метод выбора активного дня
+    pickActive(el){
+        const _ = this;
+        let arr = document.querySelectorAll('.calendar-month-day');
+        for(let i = 0; i < arr.length; i++){
+            if(i == el - 1){arr[i].classList.add('calendar-active')}
+            else {arr[i].classList.remove('calendar-active')}
+        }
     }
     init(){
         const _ = this;
@@ -88,26 +84,38 @@ class List {
         _.pickActive(_.dayInMonth);
     }
 }
+
+
+
+
+
 let list = new List();
 list.init();
 
-list.calendar.monthSelect.onclick = function(){
-    let elem = document.querySelectorAll('.calendar-select-ul');
-    if(elem[1].classList.contains('calendar-select-ul-active')){
+
+
+document.addEventListener('click',function (el) {
+    let clickTarget = el.target,
+        elem = document.querySelectorAll('.calendar-select-ul');
+    if(clickTarget == list.cal.monthSelect){
+        if(elem[1].classList.contains('calendar-select-ul-active')){
+            elem[1].classList.remove('calendar-select-ul-active')
+        }
+        elem[0].classList.toggle('calendar-select-ul-active');
+    }
+    else if(clickTarget == list.cal.yearSelect) {
+        if(elem[0].classList.contains('calendar-select-ul-active')) {
+            elem[0].classList.remove('calendar-select-ul-active')
+        }
+        elem[1].classList.toggle('calendar-select-ul-active')
+    } else {
+        elem[0].classList.remove('calendar-select-ul-active');
         elem[1].classList.remove('calendar-select-ul-active')
     }
-    elem[0].classList.toggle('calendar-select-ul-active')
-};
-list.calendar.yearSelect.onclick = function(){
-    let elem = document.querySelectorAll('.calendar-select-ul');
-    if(elem[0].classList.contains('calendar-select-ul-active')){
-        elem[0].classList.remove('calendar-select-ul-active')
-    }
-    elem[1].classList.toggle('calendar-select-ul-active')
-};
-list.calendar.daysInMonth.addEventListener('click',function (el) {
+});
+list.cal.month.addEventListener('click',function (el) {
     let clickTarget = el.target;
-    if(clickTarget == list.calendar.daysInMonth) return;
+    if(clickTarget == list.cal.month) return;
     else if(!clickTarget.classList.contains('calendar-month-day')){
         clickTarget = clickTarget.parentElement;
     }
